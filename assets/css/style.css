@@ -1,17 +1,60 @@
+*::selection {
+  /* I was getting annoyed by the highlight color, so I removed it */
+  background-color: transparent;
+}
+
 body {
   background: url(../images/background.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  color: white;
+}
+
+h1 {
+  float: right;
+  margin-top: 0;
+  margin-right: 30px;
+}
+
+.play-area {
+  padding-top: 5px;
+  margin-left: 15px;
+}
+
+#attack {
+  margin-right: 15px;
+  border-radius: 3px;
+  position: relative;
+  bottom: 62px;
+  padding: 6px 15px;
+  background: red;
+  color: white;
+  border: 0px;
+  font-size: 18px;
+}
+
+.d-none {
+  display: none !important;
+}
+
+#player, #defender {
+  display: inline-block;
+  margin-top: 0 !important;
+  height: 255px;
 }
 
 .character {
-  background-color: #fff;
+  display: inline-block;
+  margin-right: 15px;
+  background-color: white;
   border: 4px solid green;
   width: 150px;
   text-align: center;
   padding: 5px;
+  color: #000;
+  cursor: pointer;
 }
 
 .character img {
@@ -20,16 +63,27 @@ body {
   margin: 5px;
 }
 
-.player {
-}
-
-.enemy {
+#enemies .character {
   background-color: red;
   border-color: black;
   color: #fff
 }
 
-.defender {
+#defender .character {
   background-color: #000;
   color: #fff
+}
+
+#message {
+  margin-top: 15px;
+  height: 68px;
+}
+
+#reset {
+  padding: 6px 15px;
+  border-radius: 3px;
+  background: white;
+  color: #004A5D;
+  border: 0px;
+  font-size: 18px;
 }
