@@ -48,6 +48,7 @@ h1 {
 .character {
   display: inline-block;
   margin-right: 15px;
+  margin-bottom: 15px;
   background-color: white;
   border: 4px solid green;
   width: 150px;

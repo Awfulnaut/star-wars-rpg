@@ -1,3 +1,4 @@
+// Create character objects
 var charactersObj = {
   kenobi: {
     name: "Obi-Wan Kenobi",
@@ -30,7 +31,6 @@ var charactersObj = {
 };
 
 $(document).ready(function () {
-  console.log(charactersObj.length);
   // Declare DOM nodes
   var $kenobiElement = $('#kenobi');
   var $skywalkerElement = $('#skywalker');
@@ -45,6 +45,7 @@ $(document).ready(function () {
   var $attack = $('#attack');
   var $reset = $('#reset');
 
+  // Declare global variables
   var charName;
   var charClassSelector;
   var defenderActive = false;
@@ -152,9 +153,8 @@ $(document).ready(function () {
 
   // When a character in the character select area is clicked
   $('#character-select').on('click', '.character', function () {
-    // show the character that was clicked
 
-    // Assign a variable to store the class name of the element clicked
+    // Store the class name of the element clicked
     charName = $(this).attr('data-name');
     charClassSelector = '.' + charName;
 
@@ -163,10 +163,8 @@ $(document).ready(function () {
     $enemiesDiv.removeClass('d-none');
     $playerDiv.find(charClassSelector).removeClass('d-none');
 
-    // TODO Set the playerCharacter variable to the corresponding character object
+    // Set the playerCharacter variable to the corresponding character object
     playerCharacter = charactersObj[charName];
-
-    console.log(playerCharacter);
 
     // Iterate over the remaining characters and hide them
     $charSelectDiv.children().each(function () {
@@ -175,7 +173,6 @@ $(document).ready(function () {
 
     // Show the remaining characters in the enemies div
     $enemiesDiv.children().each(function () {
-      console.log("data-name: " + $(this).attr('data-name') + " | charClassSelector: " + charClassSelector);
       if ($(this).attr('data-name') !== charName) {
         $(this).removeClass('d-none');
       }
@@ -207,6 +204,7 @@ $(document).ready(function () {
       
       $message.text('Prepare for battle!');
 
+      // Hide #enemies when no more are left
       if (charactersDefeated ===  2) {
         $enemiesDiv.addClass('d-none');
       }
@@ -224,9 +222,5 @@ $(document).ready(function () {
     } else {
       $message.text("Select a new enemy to attack.");
     }
-
   });
-
 });
-
-
