@@ -5,27 +5,27 @@ var charactersObj = {
     hp: 120,
     attackPower: 8,
     baseAttackPower: 8,
-    counterAttackPower: 8
+    counterAttackPower: 11
   },
   kylo: {
     name: "Kylo",
-    hp: 130,
+    hp: 125,
     attackPower: 4,
     baseAttackPower: 4,
     counterAttackPower: 20
   },
   finn: {
     name: "Finn",
-    hp: 110,
-    attackPower: 10,
-    baseAttackPower: 10,
+    hp: 115,
+    attackPower: 9,
+    baseAttackPower: 9,
     counterAttackPower: 7
   },
   snoke: {
     name: "Snoke",
     hp: 100,
-    attackPower: 11,
-    baseAttackPower: 11,
+    attackPower: 6,
+    baseAttackPower: 6,
     counterAttackPower: 25
   }
 };
@@ -49,6 +49,7 @@ $(document).ready(function () {
   var enemyCharacter;
   var enemiesToDefeat = $charSelectDiv.children('.character').length -1;
   var enemiesDefeated = 0;
+  var losses = 0;
 
   function reset() {
     charName = "";
@@ -60,7 +61,7 @@ $(document).ready(function () {
       $(this).removeClass('d-none')
     });
     $fightDiv.addClass('d-none');
-    $message.text("");
+    $message.html("");
     $reset.addClass('d-none');
     $playerDiv.addClass('d-none');
     $defenderDiv.addClass('d-none');
@@ -68,9 +69,9 @@ $(document).ready(function () {
     enemiesDefeated = 0;
     charactersObj.rey.hp = 120;
     charactersObj.rey.attackPower = charactersObj.rey.baseAttackPower;
-    charactersObj.kylo.hp = 130;
+    charactersObj.kylo.hp = 125;
     charactersObj.kylo.attackPower = charactersObj.kylo.baseAttackPower;
-    charactersObj.finn.hp = 110;
+    charactersObj.finn.hp = 115;
     charactersObj.finn.attackPower = charactersObj.finn.baseAttackPower;
     charactersObj.snoke.hp = 100;
     charactersObj.snoke.attackPower = charactersObj.snoke.baseAttackPower;
@@ -88,14 +89,20 @@ $(document).ready(function () {
 
     if (playerCharacter.hp < 1) {
       playerCharacter.hp = 0;
-      $message.text('You have been defeated... GAME OVER!');
+      losses++;
+      if (losses > 2) {
+        $message.html('<p>You have been defeated... GAME OVER!</p>' + 
+        '<p>Don\'t get discouraged... it is possible to win with every character!</p>');
+      } else {
+        $message.html('<p>You have been defeated... GAME OVER!</p>');
+      }
       $attack.addClass('d-none');
       $reset.removeClass('d-none');
     };
     if (enemyCharacter.hp < 1) {
       
       enemyCharacter.hp = 0;
-      $message.text('You have defeated ' + enemyCharacter.name + '! Select a new enemy to fight.');
+      $message.html('<p>You have defeated ' + enemyCharacter.name + '! Select a new enemy to fight.</p>');
       enemiesDefeated++;
       $attack.addClass('d-none');
       $defenderDiv.addClass('d-none');
@@ -104,7 +111,7 @@ $(document).ready(function () {
 
       // Check for win condition
       if (enemiesDefeated ===  enemiesToDefeat) {
-        $message.text("You win! Click restart to play again.");
+        $message.html("<p>You win! Click restart to play again.</p>");
         $attack.addClass('d-none');
         $reset.removeClass('d-none');
       }
@@ -133,7 +140,7 @@ $(document).ready(function () {
 
     } else {
       // If no enemy is preset, display a message
-      $message.text('No enemy present. Please select an enemy to attack');
+      $message.html('<p>No enemy present. Please select an enemy to attack</p>');
     }    
     callback();
   }
@@ -188,10 +195,9 @@ $(document).ready(function () {
       // Set the enemyCharacter variable to the corresponding character object
       enemyCharacter = charactersObj[charName];
       
-      $message.text('Prepare for battle!');
+      $message.html('<p>Prepare for battle!');
 
       // Hide #enemies when no more are left
-      console.log($enemiesDiv.children('.character').length);
       if ($enemiesDiv.children('.character').length ===  0) {
         $enemiesDiv.addClass('d-none');
       }
@@ -206,7 +212,7 @@ $(document).ready(function () {
       attack(healthCheck);
       update();
     } else {
-      $message.text("Select a new enemy to attack.");
+      $message.html("<p>Select a new enemy to attack.</p>");
     }
   });
 });
