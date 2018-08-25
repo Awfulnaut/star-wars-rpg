@@ -32,10 +32,6 @@ var charactersObj = {
 
 $(document).ready(function () {
   // Declare DOM nodes
-  var $kenobiElement = $('#kenobi');
-  var $skywalkerElement = $('#skywalker');
-  var $sidiousElement = $('#sidious');
-  var $maulElement = $('#maul');
   var $charSelectDiv = $('#character-select');
   var $playerDiv = $('#player');
   var $enemiesDiv = $('#enemies');
@@ -51,23 +47,17 @@ $(document).ready(function () {
   var defenderActive = false;
   var playerCharacter;
   var enemyCharacter;
-  var charactersDefeated = 0;
+  var enemiesToDefeat = $charSelectDiv.children('.character').length -1;
+  var enemiesDefeated = 0;
 
   function reset() {
     charName = "";
     charClassSelector = "";
     defenderActive = false;
-    $charSelectDiv.children().each(function () {
+    $charSelectDiv.removeClass('d-none');
+    $charSelectDiv.append($('.character'));
+    $charSelectDiv.children('.character').each(function () {
       $(this).removeClass('d-none')
-    });
-    $playerDiv.children('.character').each(function () {
-      $(this).addClass('d-none')
-    });
-    $enemiesDiv.children('.character').each(function () {
-      $(this).addClass('d-none')
-    });
-    $defenderDiv.children('.character').each(function () {
-      $(this).addClass('d-none')
     });
     $fightDiv.addClass('d-none');
     $message.text("");
@@ -75,7 +65,7 @@ $(document).ready(function () {
     $playerDiv.addClass('d-none');
     $defenderDiv.addClass('d-none');
     $enemiesDiv.addClass('d-none');
-    charactersDefeated = 0;
+    enemiesDefeated = 0;
     charactersObj.kenobi.hp = 120;
     charactersObj.kenobi.attackPower = charactersObj.kenobi.baseAttackPower;
     charactersObj.skywalker.hp = 100;
@@ -106,14 +96,14 @@ $(document).ready(function () {
       
       enemyCharacter.hp = 0;
       $message.text('You have defeated ' + enemyCharacter.name + '! Select a new enemy to fight.');
-      charactersDefeated++;
+      enemiesDefeated++;
       $attack.addClass('d-none');
       $defenderDiv.addClass('d-none');
-      $defenderDiv.find(charClassSelector).addClass('d-none');
+      $charSelectDiv.append($defenderDiv.find(charClassSelector));
       defenderActive = false;
 
       // Check for win condition
-      if (charactersDefeated ===  3) {
+      if (enemiesDefeated ===  enemiesToDefeat) {
         $message.text("You win! Click restart to play again.");
         $attack.addClass('d-none');
         $reset.removeClass('d-none');
@@ -154,6 +144,8 @@ $(document).ready(function () {
   // When a character in the character select area is clicked
   $('#character-select').on('click', '.character', function () {
 
+    $charSelectDiv.addClass('d-none');
+
     // Store the class name of the element clicked
     charName = $(this).attr('data-name');
     charClassSelector = '.' + charName;
@@ -161,21 +153,14 @@ $(document).ready(function () {
     // Show the corresponding character card in the player div
     $playerDiv.removeClass('d-none');
     $enemiesDiv.removeClass('d-none');
-    $playerDiv.find(charClassSelector).removeClass('d-none');
+    $playerDiv.append($(this));
 
     // Set the playerCharacter variable to the corresponding character object
     playerCharacter = charactersObj[charName];
 
-    // Iterate over the remaining characters and hide them
-    $charSelectDiv.children().each(function () {
-      $(this).addClass('d-none');
-    });
-
-    // Show the remaining characters in the enemies div
-    $enemiesDiv.children().each(function () {
-      if ($(this).attr('data-name') !== charName) {
-        $(this).removeClass('d-none');
-      }
+    // Iterate over the remaining characters and place them in #enemies
+    $charSelectDiv.children('.character').each(function () {
+      $enemiesDiv.append($(this));
     });
   });
 
@@ -189,13 +174,14 @@ $(document).ready(function () {
       charClassSelector = '.' + charName;
 
       // Hide the clicked character in #enemies
-      $enemiesDiv.find(charClassSelector).addClass('d-none');
+      // $enemiesDiv.find(charClassSelector).addClass('d-none');
 
       // Show the clicked character in #defender
       $defenderDiv.removeClass('d-none');
-      $defenderDiv.find(charClassSelector).removeClass('d-none');
+      // $defenderDiv.find(charClassSelector).removeClass('d-none');
+      $defenderDiv.append($(this));
 
-      // Show the attack button
+      // Show the fight/message area and attack button
       $fightDiv.removeClass('d-none');
       $attack.removeClass('d-none');
 
@@ -205,16 +191,16 @@ $(document).ready(function () {
       $message.text('Prepare for battle!');
 
       // Hide #enemies when no more are left
-      if (charactersDefeated ===  2) {
+      console.log($enemiesDiv.children('.character').length);
+      if ($enemiesDiv.children('.character').length ===  0) {
         $enemiesDiv.addClass('d-none');
       }
 
-      // set defenderActive boolean to true
       defenderActive = true;
     }
   });
 
-  // TODO attack button functionality
+  // Attack button functionality
   $attack.on('click', function () {
     if (defenderActive) {
       attack(healthCheck);
