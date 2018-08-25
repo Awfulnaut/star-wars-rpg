@@ -2,31 +2,31 @@
 var charactersObj = {
   rey: {
     name: "Rey",
-    hp: 120,
-    attackPower: 8,
-    baseAttackPower: 8,
-    counterAttackPower: 11
+    hp: 115,
+    attackPower: 6,
+    baseAttackPower: 6,
+    counterAttackPower: 15
   },
   kylo: {
     name: "Kylo",
-    hp: 125,
-    attackPower: 4,
-    baseAttackPower: 4,
-    counterAttackPower: 20
+    hp: 130,
+    attackPower: 5,
+    baseAttackPower: 5,
+    counterAttackPower: 21
   },
   finn: {
     name: "Finn",
-    hp: 115,
+    hp: 110,
     attackPower: 9,
     baseAttackPower: 9,
     counterAttackPower: 7
   },
   snoke: {
     name: "Snoke",
-    hp: 100,
-    attackPower: 6,
-    baseAttackPower: 6,
-    counterAttackPower: 25
+    hp: 110,
+    attackPower: 5,
+    baseAttackPower: 5,
+    counterAttackPower: 26
   }
 };
 
@@ -67,13 +67,13 @@ $(document).ready(function () {
     $defenderDiv.addClass('d-none');
     $enemiesDiv.addClass('d-none');
     enemiesDefeated = 0;
-    charactersObj.rey.hp = 120;
+    charactersObj.rey.hp = 115;
     charactersObj.rey.attackPower = charactersObj.rey.baseAttackPower;
-    charactersObj.kylo.hp = 125;
+    charactersObj.kylo.hp = 130;
     charactersObj.kylo.attackPower = charactersObj.kylo.baseAttackPower;
-    charactersObj.finn.hp = 115;
+    charactersObj.finn.hp = 110;
     charactersObj.finn.attackPower = charactersObj.finn.baseAttackPower;
-    charactersObj.snoke.hp = 100;
+    charactersObj.snoke.hp = 110;
     charactersObj.snoke.attackPower = charactersObj.snoke.baseAttackPower;
     update();
   };
