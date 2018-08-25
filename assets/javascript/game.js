@@ -1,31 +1,31 @@
 // Create character objects
 var charactersObj = {
-  kenobi: {
-    name: "Obi-Wan Kenobi",
+  rey: {
+    name: "Rey",
     hp: 120,
     attackPower: 8,
     baseAttackPower: 8,
     counterAttackPower: 8
   },
-  skywalker: {
-    name: "Luke Skywalker",
-    hp: 100,
-    attackPower: 11,
-    baseAttackPower: 11,
-    counterAttackPower: 5
-  },
-  sidious: {
-    name: "Darth Sidious",
-    hp: 150,
+  kylo: {
+    name: "Kylo",
+    hp: 130,
     attackPower: 4,
     baseAttackPower: 4,
     counterAttackPower: 20
   },
-  maul: {
-    name: "Darth Maul",
-    hp: 180,
-    attackPower: 3,
-    baseAttackPower: 3,
+  finn: {
+    name: "Finn",
+    hp: 110,
+    attackPower: 10,
+    baseAttackPower: 10,
+    counterAttackPower: 7
+  },
+  snoke: {
+    name: "Snoke",
+    hp: 100,
+    attackPower: 11,
+    baseAttackPower: 11,
     counterAttackPower: 25
   }
 };
@@ -66,22 +66,22 @@ $(document).ready(function () {
     $defenderDiv.addClass('d-none');
     $enemiesDiv.addClass('d-none');
     enemiesDefeated = 0;
-    charactersObj.kenobi.hp = 120;
-    charactersObj.kenobi.attackPower = charactersObj.kenobi.baseAttackPower;
-    charactersObj.skywalker.hp = 100;
-    charactersObj.skywalker.attackPower = charactersObj.skywalker.baseAttackPower;
-    charactersObj.sidious.hp = 150;
-    charactersObj.sidious.attackPower = charactersObj.sidious.baseAttackPower;
-    charactersObj.maul.hp = 180;
-    charactersObj.maul.attackPower = charactersObj.maul.baseAttackPower;
+    charactersObj.rey.hp = 120;
+    charactersObj.rey.attackPower = charactersObj.rey.baseAttackPower;
+    charactersObj.kylo.hp = 130;
+    charactersObj.kylo.attackPower = charactersObj.kylo.baseAttackPower;
+    charactersObj.finn.hp = 110;
+    charactersObj.finn.attackPower = charactersObj.finn.baseAttackPower;
+    charactersObj.snoke.hp = 100;
+    charactersObj.snoke.attackPower = charactersObj.snoke.baseAttackPower;
     update();
   };
 
   function update() {
-    $('.kenobi .hp').text(charactersObj.kenobi.hp);
-    $('.skywalker .hp').text(charactersObj.skywalker.hp);
-    $('.sidious .hp').text(charactersObj.sidious.hp);
-    $('.maul .hp').text(charactersObj.maul.hp);
+    $('.rey .hp').text(charactersObj.rey.hp);
+    $('.kylo .hp').text(charactersObj.kylo.hp);
+    $('.finn .hp').text(charactersObj.finn.hp);
+    $('.snoke .hp').text(charactersObj.snoke.hp);
   }
 
   function healthCheck() {
