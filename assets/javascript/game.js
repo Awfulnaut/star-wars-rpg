@@ -195,7 +195,7 @@ $(document).ready(function () {
       // Set the enemyCharacter variable to the corresponding character object
       enemyCharacter = charactersObj[charName];
       
-      $message.html('<p>Prepare for battle!');
+      $message.html('<p>Prepare for battle!</p>');
 
       // Hide #enemies when no more are left
       if ($enemiesDiv.children('.character').length ===  0) {
