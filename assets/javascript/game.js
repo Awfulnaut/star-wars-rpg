@@ -153,19 +153,19 @@ $(document).ready(function () {
 
     $charSelectDiv.addClass('d-none');
 
+    // Show the corresponding character card in the player div
+    $playerDiv.removeClass('d-none');
+    $playerDiv.append($(this));
+
     // Store the class name of the element clicked
     charName = $(this).attr('data-name');
     charClassSelector = '.' + charName;
-
-    // Show the corresponding character card in the player div
-    $playerDiv.removeClass('d-none');
-    $enemiesDiv.removeClass('d-none');
-    $playerDiv.append($(this));
 
     // Set the playerCharacter variable to the corresponding character object
     playerCharacter = charactersObj[charName];
 
     // Iterate over the remaining characters and place them in #enemies
+    $enemiesDiv.removeClass('d-none');
     $charSelectDiv.children('.character').each(function () {
       $enemiesDiv.append($(this));
     });
@@ -180,24 +180,20 @@ $(document).ready(function () {
       charName = $(this).attr('data-name');
       charClassSelector = '.' + charName;
 
-      // Hide the clicked character in #enemies
-      // $enemiesDiv.find(charClassSelector).addClass('d-none');
+      // Set the enemyCharacter variable to the corresponding character object
+      enemyCharacter = charactersObj[charName];
 
       // Show the clicked character in #defender
       $defenderDiv.removeClass('d-none');
-      // $defenderDiv.find(charClassSelector).removeClass('d-none');
       $defenderDiv.append($(this));
 
       // Show the fight/message area and attack button
       $fightDiv.removeClass('d-none');
       $attack.removeClass('d-none');
-
-      // Set the enemyCharacter variable to the corresponding character object
-      enemyCharacter = charactersObj[charName];
       
       $message.html('<p>Prepare for battle!</p>');
 
-      // Hide #enemies when no more are left
+      // Hide #enemies when no more enemies are left
       if ($enemiesDiv.children('.character').length ===  0) {
         $enemiesDiv.addClass('d-none');
       }
