@@ -7,63 +7,72 @@
   <title>Star Wars RPG</title>
   <link rel="shortcut icon" href="assets/images/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
-  <script src="assets/javascript/game.js"></script>
 </head>
 
 <body>
-  <h1>Star Wars RPG</h1>
 
-  <div class="play-area">
-    <div id="character-select">
-      <h2>Select a character to play</h2>
-      <div class="character rey" data-name="rey">
-        <p class="name">Rey</p>
-        <img src="assets/images/rey.png" alt="">
-        <p class="hp">115</p>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <h1>Star Wars RPG</h1>
+        <div class="main">
+          <div id="character-select">
+            <h2>Select a character to play</h2>
+            <div class="character" data-name="rey">
+              <p class="name">Rey</p>
+              <img src="assets/images/rey.png" alt="Rey">
+              <p class="hp">115</p>
+            </div>
+            <div class="character" data-name="kylo">
+              <p class="name">Kylo</p>
+              <img src="assets/images/kylo.png" alt="Kylo">
+              <p class="hp">130</p>
+            </div>
+            <div class="character" data-name="finn">
+              <p class="name">Finn</p>
+              <img src="assets/images/finn.png" alt="Finn">
+              <p class="hp">110</p>
+            </div>
+            <div class="character" data-name="snoke">
+              <p class="name">Snoke</p>
+              <img src="assets/images/snoke.png" alt="Snoke">
+              <p class="hp">110</p>
+            </div>
+          </div>
+
+          <div class="play-area">
+
+            <div id="player" class="d-none text-center">
+              <h2>Player</h2>
+            </div>
+
+            <div id="defender" class="d-none text-center">
+              <h2>Defender</h2>
+            </div>
+
+            <button id="attack" class="d-none">Attack</button>
+
+            <div id="fight" class="d-none">
+              
+              <div id="message"></div>
+              <button id="reset" class="d-none">Restart</button>
+            </div>
+          </div>
+
+          <div id="enemies" class="d-none">
+            <h2>Enemies</h2>
+          </div>
+        </div>
       </div>
-      <div class="character kylo" data-name="kylo">
-        <p class="name">Kylo</p>
-        <img src="assets/images/kylo.png" alt="">
-        <p class="hp">130</p>
-      </div>
-      <div class="character finn" data-name="finn">
-        <p class="name">Finn</p>
-        <img src="assets/images/finn.png" alt="">
-        <p class="hp">110</p>
-      </div>
-      <div class="character snoke" data-name="snoke">
-        <p class="name">Snoke</p>
-        <img src="assets/images/snoke.png" alt="">
-        <p class="hp">110</p>
-      </div>
-    </div>
-
-    <div id="player" class="d-none">
-      <h2>Your Character</h2>
-      
-    </div>
-
-    <button id="attack" class="d-none">Attack</button>
-
-    <div id="defender" class="d-none">
-      <h2>Defender</h2>
-      
-    </div>
-
-    <div id="fight" class="d-none">
-      
-      <div id="message"></div>
-      <button id="reset" class="d-none">Restart</button>
-    </div>
-
-    <div id="enemies" class="d-none">
-      <h2>Enemies Available to Attack</h2>
-      
     </div>
   </div>
   
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="assets/javascript/game.js"></script>
 </body>
 
 </html>

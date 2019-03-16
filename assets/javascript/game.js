@@ -43,7 +43,6 @@ $(document).ready(function () {
 
   // Declare global variables
   var charName;
-  var charClassSelector;
   var defenderActive = false;
   var playerCharacter;
   var enemyCharacter;
@@ -53,7 +52,6 @@ $(document).ready(function () {
 
   function reset() {
     charName = "";
-    charClassSelector = "";
     defenderActive = false;
     $charSelectDiv.removeClass('d-none');
     $charSelectDiv.append($('.character'));
@@ -79,10 +77,10 @@ $(document).ready(function () {
   };
 
   function update() {
-    $('.rey .hp').text(charactersObj.rey.hp);
-    $('.kylo .hp').text(charactersObj.kylo.hp);
-    $('.finn .hp').text(charactersObj.finn.hp);
-    $('.snoke .hp').text(charactersObj.snoke.hp);
+    $('[data-name=rey] .hp').text(charactersObj.rey.hp);
+    $('[data-name=kylo] .hp').text(charactersObj.kylo.hp);
+    $('[data-name=finn] .hp').text(charactersObj.finn.hp);
+    $('[data-name=snoke] .hp').text(charactersObj.snoke.hp);
   }
 
   function healthCheck() {
@@ -106,7 +104,7 @@ $(document).ready(function () {
       enemiesDefeated++;
       $attack.addClass('d-none');
       $defenderDiv.addClass('d-none');
-      $charSelectDiv.append($defenderDiv.find(charClassSelector));
+      $charSelectDiv.append($('#defender .character'));
       defenderActive = false;
 
       // Check for win condition
@@ -159,7 +157,6 @@ $(document).ready(function () {
 
     // Store the class name of the element clicked
     charName = $(this).attr('data-name');
-    charClassSelector = '.' + charName;
 
     // Set the playerCharacter variable to the corresponding character object
     playerCharacter = charactersObj[charName];
@@ -178,7 +175,6 @@ $(document).ready(function () {
 
       // set character selection variables
       charName = $(this).attr('data-name');
-      charClassSelector = '.' + charName;
 
       // Set the enemyCharacter variable to the corresponding character object
       enemyCharacter = charactersObj[charName];
