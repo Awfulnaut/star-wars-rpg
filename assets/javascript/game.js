@@ -56,7 +56,7 @@ $(document).ready(function () {
     $charSelectDiv.removeClass('d-none');
     $charSelectDiv.append($('.character'));
     $charSelectDiv.children('.character').each(function () {
-      $(this).removeClass('d-none')
+      $(this).removeClass('d-none attack-left attack-right')
     });
     $fightDiv.addClass('d-none');
     $message.html("");
@@ -103,7 +103,8 @@ $(document).ready(function () {
       $message.html('<p>You have defeated ' + enemyCharacter.name + '! Select a new enemy to fight.</p>');
       enemiesDefeated++;
       $attack.addClass('d-none');
-      $defenderDiv.addClass('d-none');
+
+      $('#defender').addClass('d-none');
       $charSelectDiv.append($('#defender .character'));
       defenderActive = false;
 
@@ -111,6 +112,8 @@ $(document).ready(function () {
       if (enemiesDefeated ===  enemiesToDefeat) {
         $message.html("<p>You win! Click restart to play again.</p>");
         $attack.addClass('d-none');
+        $('.attack-left').removeClass('attack-left')
+        $('.attack-right').removeClass('attack-right')
         $reset.removeClass('d-none');
       }
     }
@@ -122,6 +125,8 @@ $(document).ready(function () {
       // Deal damage to the enemy
       enemyCharacter.hp -= playerCharacter.attackPower;
 
+      attackAnimation();
+
       // Enemy only counterattacks if they are still alive
       if (enemyCharacter.hp > 1) {
         playerCharacter.hp -= enemyCharacter.counterAttackPower;
@@ -129,8 +134,8 @@ $(document).ready(function () {
 
       // Display damage
       $message.html(
-        "<p>You attacked " + enemyCharacter.name + " for " + playerCharacter.attackPower + " damage.</p>" + 
-        "<p>" + enemyCharacter.name + " attacked you back for " + enemyCharacter.counterAttackPower + " damage.</p>"
+        `<p>You attacked ${enemyCharacter.name} for <strong>${playerCharacter.attackPower}</strong> damage.</p>
+        <p>${enemyCharacter.name} attacked you back for <strong>${enemyCharacter.counterAttackPower}</strong> damage.</p>`
       );
 
       // Increase player attack power
@@ -141,6 +146,26 @@ $(document).ready(function () {
       $message.html('<p>No enemy present. Please select an enemy to attack</p>');
     }    
     callback();
+  }
+
+
+  function attackAnimation() {
+    // clone the characters and add the animation class
+    let $player = $('#player .character').removeClass('attack-right attack-left');
+    let $clonedPlayer = $player.clone(true).addClass('attack-right');
+    let $defender = $('#defender .character').removeClass('attack-right attack-left');
+    let $clonedDefender = $defender.clone(true);
+    setTimeout(() => {
+      $clonedDefender.addClass('attack-left')
+    }, 200);
+    
+    // Insert the cloned elements before the originals
+    $player.before($clonedPlayer);
+    $defender.before($clonedDefender);
+            
+    // remove the original characters
+    $("#player .character:last").remove();
+    $("#defender .character:last").remove();    
   }
 
   // Reset game when clicked
