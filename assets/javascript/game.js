@@ -1,3 +1,16 @@
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyCRG_yfW7rjiqhbgtUqa12zLN1Y4pUaMo0",
+  authDomain: "star-wars-rpg.firebaseapp.com",
+  databaseURL: "https://star-wars-rpg.firebaseio.com",
+  projectId: "star-wars-rpg",
+  storageBucket: "star-wars-rpg.appspot.com",
+  messagingSenderId: "396004891363"
+};
+firebase.initializeApp(config);
+
+var db = firebase.database();
+
 // Create character objects
 var charactersObj = {
   rey: {
@@ -5,30 +18,46 @@ var charactersObj = {
     hp: 115,
     attackPower: 6,
     baseAttackPower: 6,
-    counterAttackPower: 15
+    counterAttackPower: 15,
+    wins: 0
   },
   kylo: {
     name: "Kylo",
     hp: 130,
     attackPower: 5,
     baseAttackPower: 5,
-    counterAttackPower: 21
+    counterAttackPower: 21,
+    wins: 0
   },
   finn: {
     name: "Finn",
     hp: 110,
     attackPower: 9,
     baseAttackPower: 9,
-    counterAttackPower: 7
+    counterAttackPower: 7,
+    wins: 0
   },
   snoke: {
     name: "Snoke",
     hp: 110,
     attackPower: 5,
     baseAttackPower: 5,
-    counterAttackPower: 26
+    counterAttackPower: 26,
+    wins: 0
   }
 };
+
+db.ref().on('value', function(snapshot) {
+
+  charactersObj.rey.wins = snapshot.val().rey.wins;
+  charactersObj.finn.wins = snapshot.val().finn.wins;
+  charactersObj.kylo.wins = snapshot.val().kylo.wins;
+  charactersObj.snoke.wins = snapshot.val().snoke.wins;
+
+  // Handle the errors
+}, function(errorObject) {
+  console.log("Errors handled: " + errorObject.code);
+});
 
 $(document).ready(function () {
   // Declare DOM nodes
@@ -110,6 +139,11 @@ $(document).ready(function () {
 
       // Check for win condition
       if (enemiesDefeated ===  enemiesToDefeat) {
+        var player = playerCharacter.name.toLowerCase();
+        playerCharacter.wins++;
+        db.ref(`/${player}`).set({
+          wins: playerCharacter.wins
+        })
         $message.html("<p>You win! Click restart to play again.</p>");
         $attack.addClass('d-none');
         $('.attack-left').removeClass('attack-left')
